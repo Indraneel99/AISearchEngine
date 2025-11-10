@@ -39,6 +39,231 @@ feed_authors = [f["author"] for f in feeds]
 
 
 # -----------------------
+# Custom CSS for modern UI
+# -----------------------
+CUSTOM_CSS = """
+/* Modern, clean UI with subtle glass and gradients */
+:root {
+  --radius-xl: 16px;
+  --radius-lg: 14px;
+  --radius-md: 12px;
+  --shadow-lg: 0 18px 35px rgba(2, 6, 23, 0.10);
+  --shadow-md: 0 10px 22px rgba(2, 6, 23, 0.08);
+  --border: 1px solid rgba(2, 6, 23, 0.08);
+  --primary: #6366f1; /* indigo-500 */
+  --primary-600: #4f46e5;
+  --primary-700: #4338ca;
+  --slate-900: #0f172a;
+  --slate-800: #1e293b;
+  --slate-700: #334155;
+  --slate-600: #475569;
+  --slate-500: #64748b;
+  --slate-200: #e2e8f0;
+  --slate-100: #f1f5f9;
+  --bg: radial-gradient(1200px 800px at 0% 0%, #f6f8ff 0%, #ffffff 40%);
+}
+
+.dark:root {
+  --border: 1px solid rgba(255, 255, 255, 0.08);
+  --bg: radial-gradient(1200px 800px at 0% 0%, #0b1220 0%, #0a0f1c 40%);
+}
+
+.gradio-container, body {
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Inter, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  background: var(--bg);
+  color: var(--slate-900);
+}
+.dark .gradio-container, .dark body { color: #e5e7eb; }
+
+/* Header */
+#app-header {
+  background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 50%, #7c3aed 100%);
+  color: white;
+  padding: 28px 28px;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 18px;
+}
+#app-header h1 {
+  font-size: 34px;
+  line-height: 1.1;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.02em;
+}
+#app-header p {
+  margin: 0;
+  opacity: 0.95;
+}
+
+/* Panels */
+.panel {
+  backdrop-filter: saturate(160%) blur(8px);
+  background: rgba(255, 255, 255, 0.75);
+  border: var(--border);
+  border-radius: var(--radius-xl);
+  padding: 18px;
+  box-shadow: var(--shadow-md);
+}
+.dark .panel {
+  background: rgba(2, 6, 23, 0.55);
+}
+
+/* Segmented control (radio) */
+.segmented .wrap {
+  display: grid !important;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 8px;
+  background: var(--slate-100);
+  border: var(--border);
+  border-radius: 999px;
+  padding: 6px;
+}
+.dark .segmented .wrap { background: rgba(255, 255, 255, 0.06); }
+.segmented input[type="radio"] { display: none; }
+.segmented label {
+  border-radius: 999px !important;
+  padding: 10px 14px !important;
+  text-align: center;
+  border: none !important;
+  transition: all .18s ease;
+  color: var(--slate-700);
+  background: transparent;
+}
+.dark .segmented label { color: #cbd5e1; }
+.segmented input[type="radio"]:checked + label {
+  background: white !important;
+  color: var(--slate-900) !important;
+  box-shadow: 0 8px 18px rgba(2, 6, 23, 0.08);
+}
+.dark .segmented input[type="radio"]:checked + label {
+  background: var(--slate-800) !important;
+  color: #e5e7eb !important;
+}
+
+/* Form controls polish */
+.panel .gr-form .gr-block, .panel .gr-form { gap: 10px; }
+.panel .gr-textbox textarea, .panel .gr-textbox input,
+.panel .gr-dropdown input, .panel .gr-dropdown .wrap,
+.panel .gr-slider input {
+  border-radius: 12px !important;
+}
+
+/* Submit button */
+.submit-button .gr-button {
+  background: linear-gradient(135deg, var(--primary), var(--primary-600));
+  border: none;
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(79, 70, 229, 0.25);
+  padding: 12px 16px;
+}
+.submit-button .gr-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(79, 70, 229, 0.32);
+}
+
+/* Output area */
+.output-panel {
+  padding: 0;
+}
+.model-info {
+  margin-top: 8px;
+}
+.model-info .content {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #dcfce7, #dbeafe);
+  color: #065f46;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: var(--border);
+}
+.dark .model-info .content {
+  background: linear-gradient(135deg, rgba(22, 101, 52, 0.35), rgba(30, 58, 138, 0.35));
+  color: #d1fae5;
+}
+
+/* Results grid and cards */
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 14px;
+  padding: 14px;
+}
+.article-card {
+  border: var(--border);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 16px;
+  box-shadow: var(--shadow-md);
+}
+.dark .article-card {
+  background: rgba(2, 6, 23, 0.6);
+}
+.article-card__title {
+  font-size: 18px;
+  margin: 0 0 8px 0;
+  color: var(--slate-900);
+}
+.dark .article-card__title { color: #e5e7eb; }
+.article-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.chip {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--slate-100);
+  border: var(--border);
+  color: var(--slate-700);
+}
+.dark .chip { background: rgba(255, 255, 255, 0.06); color: #cbd5e1; }
+.article-card__authors {
+  color: var(--slate-600);
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.dark .article-card__authors { color: #94a3b8; }
+.article-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary-600);
+  text-decoration: none;
+  font-weight: 600;
+}
+.article-card__link:hover { color: var(--primary-700); }
+
+/* AI answer card */
+.answer-card {
+  margin: 14px;
+  border: var(--border);
+  border-radius: var(--radius-xl);
+  padding: 18px;
+  background: linear-gradient(180deg, rgba(99, 102, 241, 0.06), rgba(124, 58, 237, 0.06));
+  box-shadow: var(--shadow-md);
+}
+.dark .answer-card {
+  background: linear-gradient(180deg, rgba(79, 70, 229, 0.18), rgba(124, 58, 237, 0.18));
+}
+.answer-card .markdown-body table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.answer-card .markdown-body th, .answer-card .markdown-body td {
+  border: 1px solid rgba(0,0,0,0.05);
+  padding: 6px 10px;
+}
+"""
+
+
+# -----------------------
 # API helpers
 # -----------------------
 def fetch_unique_titles(payload):
@@ -156,26 +381,27 @@ def handle_search_articles(query_text, feed_name, feed_author, title_keywords, l
         if not results:
             return "No results found."
 
-        html_output = ""
+        html_output = "<div class='results-grid'>"
         for item in results:
+            title = item.get("title", "No title")
+            feed_n = item.get("feed_name", "N/A")
+            feed_a = item.get("feed_author", "N/A")
+            authors = ", ".join(item.get("article_author") or ["N/A"])
+            url = item.get("url", "#")
             html_output += (
-                f"<div style='background-color:#F0F8FF; padding:20px; "
-                f"border-radius:10px; font-size:18px; margin-bottom:15px;'>\n"
-                f"    <h2 style='font-size:22px; color:#1f4e79; margin-top:0;'>"
-                f"{item.get('title', 'No title')}</h2>\n"
-                f"    <p style='margin:5px 0;'>"
-                f"<b>Newsletter:</b> {item.get('feed_name', 'N/A')}"
-                f"</p>\n"
-                f"    <p style='margin:5px 0;'>"
-                f"<b>Author:</b> {item.get('feed_author', 'N/A')}"
-                f"</p>\n"
-                f"    <p style='margin:5px 0;'><b>Article Authors:</b> "
-                f"{', '.join(item.get('article_author') or ['N/A'])}</p>\n"
-                f"    <p style='margin:5px 0;'><b>URL:</b> "
-                f"<a href='{item.get('url', '#')}' target='_blank' style='color:#0066cc;'>"
-                f"{item.get('url', 'No URL')}</a></p>\n"
-                f"</div>\n"
+                "<div class='article-card'>"
+                f"  <h3 class='article-card__title'>{title}</h3>"
+                f"  <div class='article-card__meta'>"
+                f"    <span class='chip'>Newsletter: {feed_n}</span>"
+                f"    <span class='chip'>Author: {feed_a}</span>"
+                f"  </div>"
+                f"  <div class='article-card__authors'><b>Article Authors:</b> {authors}</div>"
+                f"  <a class='article-card__link' href='{url}' target='_blank' rel='noopener noreferrer'>"
+                f"     Open Article →"
+                f"  </a>"
+                "</div>"
             )
+        html_output += "</div>"
         return html_output
 
     except Exception as e:
@@ -224,40 +450,30 @@ def handle_ai_question_streaming(
 
     try:
         answer_html = ""
-        model_info = f"Provider: {provider}"
+        model_info = f"<div class='content'>Provider: {provider}</div>"
 
         for _, (event_type, content) in enumerate(call_ai(payload, streaming=True)):
             if event_type == "text":
                 # Convert markdown to HTML
                 html_content = markdown.markdown(content, extensions=["tables"])
-                answer_html = (
-                    f"\n"
-                    f"<div style='background-color:#E8F0FE; "
-                    f"padding:15px; border-radius:10px; font-size:16px;'>\n"
-                    f"    {html_content}\n"
-                    f"</div>\n"
-                )
+                answer_html = f"<div class='answer-card'><div class='markdown-body'>{html_content}</div></div>"
                 yield answer_html, model_info
 
             elif event_type == "model":
-                model_info = f"Provider: {provider} | Model: {content}"
+                model_info = f"<div class='content'>Provider: {provider} | Model: {content}</div>"
                 yield answer_html, model_info
 
             elif event_type == "truncated":
-                answer_html += (
-                    f"<div style='color:#ff6600; padding:10px; font-weight:bold;'>⚠️ {content}</div>"
-                )
+                answer_html += f"<div class='answer-card'><div style='color:#ff8800; font-weight:700;'>⚠️ {content}</div></div>"
                 yield answer_html, model_info
 
             elif event_type == "error":
-                error_html = (
-                    f"<div style='color:red; padding:10px; font-weight:bold;'>❌ {content}</div>"
-                )
+                error_html = f"<div class='answer-card'><div style='color:#ef4444; font-weight:700;'>❌ {content}</div></div>"
                 yield error_html, model_info
                 break
 
     except Exception as e:
-        error_html = f"<div style='color:red; padding:10px;'>Error: {str(e)}</div>"
+        error_html = "<div class='answer-card'><div style='color:#ef4444;'>Error: {}</div></div>".format(str(e))
         yield error_html, model_info
 
 
@@ -295,26 +511,19 @@ def handle_ai_question_non_streaming(query_text, feed_name, feed_author, limit, 
 
     try:
         answer_html = ""
-        model_info = f"Provider: {provider}"
+        model_info = f"<div class='content'>Provider: {provider}</div>"
 
         for event_type, content in call_ai(payload, streaming=False):
             if event_type == "text":
                 html_content = markdown.markdown(content, extensions=["tables"])
-                answer_html = (
-                    "<div style='background-color:#E8F0FE; "
-                    "padding:15px; border-radius:10px; font-size:16px;'>\n"
-                    f"{html_content}\n"
-                    "</div>\n"
-                )
+                answer_html = f"<div class='answer-card'><div class='markdown-body'>{html_content}</div></div>"
             elif event_type == "model":
-                model_info = f"Provider: {provider} | Model: {content}"
+                model_info = f"<div class='content'>Provider: {provider} | Model: {content}</div>"
             elif event_type == "truncated":
-                answer_html += (
-                    f"<div style='color:#ff6600; padding:10px; font-weight:bold;'>⚠️ {content}</div>"
-                )
+                answer_html += f"<div class='answer-card'><div style='color:#ff8800; font-weight:700;'>⚠️ {content}</div></div>"
             elif event_type == "error":
                 return (
-                    f"<div style='color:red; padding:10px; font-weight:bold;'>❌ {content}</div>",
+                    f"<div class='answer-card'><div style='color:#ef4444; font-weight:700;'>❌ {content}</div></div>",
                     model_info,
                 )
 
@@ -322,8 +531,8 @@ def handle_ai_question_non_streaming(query_text, feed_name, feed_author, limit, 
 
     except Exception as e:
         return (
-            f"<div style='color:red; padding:10px;'>Error: {str(e)}</div>",
-            f"Provider: {provider}",
+            f"<div class='answer-card'><div style='color:#ef4444;'>Error: {str(e)}</div></div>",
+            f"<div class='content'>Provider: {provider}</div>",
         )
 
 
@@ -342,76 +551,73 @@ def update_model_choices(provider):
 # -----------------------
 # Gradio UI
 # -----------------------
-with gr.Blocks(title="Substack Articles LLM Engine", theme=gr.themes.Soft()) as demo:
+with gr.Blocks(title="Substack Articles LLM Engine", theme=gr.themes.Soft(), css=CUSTOM_CSS) as demo:
     # Header
     gr.HTML(
-        "<div style='background-color:#ff6719; padding:20px; border-radius:12px; "
-        "text-align:center; margin-bottom:20px;'>\n"
-        "    <h1 style='color:white; font-size:42px; font-family:serif; margin:0;'>\n"
-        "        📰 Substack Articles LLM Engine\n"
-        "    </h1>\n"
-        "</div>\n"
+        "<div id='app-header'>"
+        "  <h1>📰 Substack Articles LLM Engine</h1>"
+        "  <p>Search Substack content or ask an AI across your feeds — fast and delightful.</p>"
+        "</div>"
     )
 
     with gr.Row():
-        with gr.Column(scale=1):
-            # Search Mode Selection
-            gr.Markdown("## 🔍 Select Search Mode")
-            search_type = gr.Radio(
-                choices=["Search Articles", "Ask the AI"],
-                value="Search Articles",
-                label="Search Mode",
-                info="Choose between searching for articles or asking AI questions",
-            )
-
-            # Common filters
-            gr.Markdown("### Filters")
-            query_text = gr.Textbox(label="Query", placeholder="Type your query here...", lines=3)
-            feed_author = gr.Dropdown(
-                choices=[""] + feed_authors, label="Author (optional)", value=""
-            )
-            feed_name = gr.Dropdown(
-                choices=[""] + feed_names, label="Newsletter (optional)", value=""
-            )
-
-            # Conditional fields based on search type
-            title_keywords = gr.Textbox(
-                label="Title Keywords (optional)",
-                placeholder="Filter by words in the title",
-                visible=True,
-            )
-
-            limit = gr.Slider(
-                minimum=1, maximum=20, step=1, label="Number of results", value=5, visible=True
-            )
-
-            # LLM Options (only visible for AI mode)
-            with gr.Group(visible=False) as llm_options:
-                gr.Markdown("### ⚙️ LLM Options")
-                provider = gr.Dropdown(
-                    choices=["OpenRouter", "HuggingFace", "OpenAI"],
-                    label="Select LLM Provider",
-                    value="OpenRouter",
-                )
-                model = gr.Dropdown(
-                    choices=get_models_for_provider("OpenRouter"),
-                    label="Select Model",
-                    value="Automatic Model Selection (Model Routing)",
-                )
-                streaming_mode = gr.Radio(
-                    choices=["Streaming", "Non-Streaming"],
-                    value="Streaming",
-                    label="Answer Mode",
-                    info="Streaming shows results as they're generated",
+        with gr.Column(scale=5):
+            with gr.Group(elem_classes="panel"):
+                gr.Markdown("#### Mode")
+                search_type = gr.Radio(
+                    choices=["Search Articles", "Ask the AI"],
+                    value="Search Articles",
+                    label="",
+                    info="Choose between searching for articles or asking AI questions",
+                    elem_classes="segmented",
                 )
 
-            # Submit button
-            submit_btn = gr.Button("🔎 Search / Ask AI", variant="primary", size="lg")
+                with gr.Accordion("Filters", open=True):
+                    query_text = gr.Textbox(
+                        label="Query",
+                        placeholder="Type your query here...",
+                        lines=4,
+                    )
+                    feed_author = gr.Dropdown(
+                        choices=[""] + feed_authors, label="Author (optional)", value=""
+                    )
+                    feed_name = gr.Dropdown(
+                        choices=[""] + feed_names, label="Newsletter (optional)", value=""
+                    )
+                    title_keywords = gr.Textbox(
+                        label="Title Keywords (optional)",
+                        placeholder="Filter by words in the title",
+                        visible=True,
+                    )
+                    limit = gr.Slider(
+                        minimum=1, maximum=20, step=1, label="Number of results", value=5, visible=True
+                    )
 
-        with gr.Column(scale=2):
-            # Output area
-            output_html = gr.HTML(label="Results")
-            model_info = gr.HTML(visible=False)
+                with gr.Accordion("⚙️ LLM Settings", open=True):
+                    with gr.Group(visible=False) as llm_options:
+                        provider = gr.Dropdown(
+                            choices=["OpenRouter", "HuggingFace", "OpenAI"],
+                            label="Select LLM Provider",
+                            value="OpenRouter",
+                        )
+                        model = gr.Dropdown(
+                            choices=get_models_for_provider("OpenRouter"),
+                            label="Select Model",
+                            value="Automatic Model Selection (Model Routing)",
+                        )
+                        streaming_mode = gr.Radio(
+                            choices=["Streaming", "Non-Streaming"],
+                            value="Streaming",
+                            label="Answer Mode",
+                            info="Streaming shows results as they're generated",
+                        )
+
+                submit_btn = gr.Button("🔎 Search / Ask AI", variant="primary", size="lg", elem_classes="submit-button")
+
+        with gr.Column(scale=7):
+            with gr.Group(elem_classes="panel output-panel"):
+                output_html = gr.HTML(label="Results")
+                model_info = gr.HTML(visible=False, elem_classes="model-info")
 
     # Event handlers
     def toggle_visibility(search_type):
