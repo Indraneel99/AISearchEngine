@@ -1,3 +1,15 @@
+---
+title: Articles Search Engine
+emoji: 🔎
+colorFrom: blue
+colorTo: indigo
+sdk: gradio
+sdk_version: "5.45.0"
+app_file: frontend/app.py
+python_version: "3.12"
+pinned: false
+---
+
 # Articles Search Engine
 
 A compact, production-style RAG pipeline. It ingests Substack RSS articles, stores them in Postgres (Supabase), creates dense/sparse embeddings in Qdrant, and exposes search and answer endpoints via FastAPI with a simple Gradio UI.
