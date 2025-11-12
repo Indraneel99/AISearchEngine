@@ -73,9 +73,9 @@ async def lifespan(app: FastAPI):
 # -----------------------
 
 app = FastAPI(
-    title="Substack RAG API",
+    title="Search Engine RAG API",
     version="1.0",
-    description="API for Substack Retrieval-Augmented Generation (RAG) system",
+    description="API for Articles Search Retrieval-Augmented Generation (RAG) system",
     lifespan=lifespan,
     # root_path=root_path,
 )

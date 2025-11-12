@@ -12,7 +12,7 @@ class Base(DeclarativeBase):
     pass
 
 
-class SubstackArticle(Base):
+class FeedArticle(Base):
     __tablename__ = settings.supabase_db.table_name
 
     # Primary internal ID

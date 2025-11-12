@@ -26,7 +26,7 @@ echo "✅ Environment variables loaded."
 # Configuration
 # -----------------------
 PROJECT_ID="personal-projects-477710"
-SERVICE_NAME="substack-pipeline-fastapi"
+SERVICE_NAME="feed-pipeline-fastapi"
 REGION="asia-south2" #europe-west1 "europe-west6"
 IMAGE_NAME="gcr.io/$PROJECT_ID/$SERVICE_NAME"
 

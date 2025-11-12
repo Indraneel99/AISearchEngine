@@ -2,17 +2,17 @@ from sqlalchemy import inspect
 from sqlalchemy.exc import SQLAlchemyError
 
 from src.infrastructure.supabase.init_session import init_engine
-from src.models.sql_models import Base, SubstackArticle
+from src.models.sql_models import Base, FeedArticle
 from src.utils.logger_util import setup_logging
 
 logger = setup_logging()
 
 
 def create_table() -> None:
-    """Create the SubstackArticle table in the Supabase Postgres database if it does not exist.
+    """Create the FeedArticle table in the Supabase Postgres database if it does not exist.
 
     This function initializes a SQLAlchemy engine, checks if the table defined by
-    `SubstackArticle.__tablename__` exists in the database, and creates it if necessary.
+    `FeedArticle.__tablename__` exists in the database, and creates it if necessary.
     The engine is properly disposed of after the operation to prevent resource leaks.
     Errors during table creation are logged and handled gracefully.
 
@@ -33,14 +33,14 @@ def create_table() -> None:
         # Create an inspector to check existing tables
         inspector = inspect(engine)
         existing_tables = inspector.get_table_names()
-        table_name = SubstackArticle.__tablename__
+        table_name = FeedArticle.__tablename__
 
         # Check if the table already exists
         if table_name in existing_tables:
             logger.info(f"Table '{table_name}' already exists. No action needed.")
         else:
             logger.info(f"Table '{table_name}' does not exist. Creating...")
-            # Create all tables defined in Base.metadata (includes SubstackArticle)
+            # Create all tables defined in Base.metadata (includes FeedArticle)
             Base.metadata.create_all(bind=engine)
             logger.info(f"Table '{table_name}' created successfully.")
     except SQLAlchemyError as e:

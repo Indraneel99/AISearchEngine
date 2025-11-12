@@ -26,7 +26,7 @@ from qdrant_client.models import Batch, Distance, SparseVector, models
 from sqlalchemy.orm import Session
 
 from src.config import settings
-from src.models.sql_models import SubstackArticle
+from src.models.sql_models import FeedArticle
 from src.models.vectorstore_models import ArticleChunkPayload
 from src.utils.logger_util import log_batch_status, setup_logging
 from src.utils.text_splitter import TextSplitter
@@ -522,7 +522,7 @@ class AsyncQdrantVectorStore:
 
     async def _article_batch_generator(
         self, session: Session, from_date: datetime | None = None
-    ) -> AsyncGenerator[list[SubstackArticle], None]:
+    ) -> AsyncGenerator[list[FeedArticle], None]:
         """Yield batches of articles from SQL database.
 
         Args:
@@ -530,7 +530,7 @@ class AsyncQdrantVectorStore:
             from_date (datetime, optional): Filter articles from this date.
 
         Yields:
-            list[SubstackArticle]: Batch of articles.
+            list[FeedArticle]: Batch of articles.
 
         Raises:
             Exception: If database query fails.
@@ -542,9 +542,9 @@ class AsyncQdrantVectorStore:
         try:
             offset = 0
             while True:
-                query = session.query(SubstackArticle).order_by(SubstackArticle.published_at)
+                query = session.query(FeedArticle).order_by(FeedArticle.published_at)
                 if from_date:
-                    query = query.filter(SubstackArticle.published_at >= from_date)
+                    query = query.filter(FeedArticle.published_at >= from_date)
                 articles = query.offset(offset).limit(self.article_batch_size).all()
                 if not articles:
                     break

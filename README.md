@@ -12,7 +12,7 @@ pinned: false
 
 # Articles Search Engine
 
-A compact, production-style RAG pipeline. It ingests Substack RSS articles, stores them in Postgres (Supabase), creates dense/sparse embeddings in Qdrant, and exposes search and answer endpoints via FastAPI with a simple Gradio UI.
+A compact, production-style RAG pipeline. It ingests Substack, Medium and top publications RSS articles, stores them in Postgres (Supabase), creates dense/sparse embeddings in Qdrant, and exposes search and answer endpoints via FastAPI with a simple Gradio UI.
 
 ## How it works (brief)
 - Ingest RSS → Supabase:
@@ -23,6 +23,7 @@ A compact, production-style RAG pipeline. It ingests Substack RSS articles, stor
 - Search + generate:
   - FastAPI (`src/api/main.py`) exposes search endpoints (keyword, semantic, hybrid) and assembles answers with citations.
   - LLM providers are pluggable with fallback (OpenRouter, OpenAI, Hugging Face).
+  - Opik is used for Evaluation
 - UI + deploy:
   - Gradio app for quick local search (`frontend/app.py`).
   - Containerization with Docker and optional deploy to Google Cloud Run.
@@ -31,7 +32,7 @@ A compact, production-style RAG pipeline. It ingests Substack RSS articles, stor
 - Python 3.12, FastAPI, Prefect, SQLAlchemy
 - Supabase (Postgres) for articles
 - Qdrant for vector search (dense + sparse/hybrid)
-- OpenRouter / OpenAI / Hugging Face for LLM completion
+- OpenRouter / OpenAI / Hugging Face for LLM completion, Opik for LLM Evaluation
 - Gradio UI, Docker, Google Cloud Run
 - Config via Pydantic Settings, `uv` or `pip` for deps
 

@@ -3746,7 +3746,7 @@ wheels = [
 ]
 
 [[package]]
-name = "substack-newsletters-search-course"
+name = "AISearchEngine"
 version = "1.0.0"
 source = { editable = "." }
 dependencies = [

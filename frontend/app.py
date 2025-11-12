@@ -551,12 +551,12 @@ def update_model_choices(provider):
 # -----------------------
 # Gradio UI
 # -----------------------
-with gr.Blocks(title="Substack Articles LLM Engine", theme=gr.themes.Soft(), css=CUSTOM_CSS) as demo:
+with gr.Blocks(title="AI Search Engine for Articles", theme=gr.themes.Soft(), css=CUSTOM_CSS) as demo:
     # Header
     gr.HTML(
         "<div id='app-header'>"
-        "  <h1>📰 Substack Articles LLM Engine</h1>"
-        "  <p>Search Substack content or ask an AI across your feeds — fast and delightful.</p>"
+        "  <h1>📰 AI Search Engine for Articles</h1>"
+        "  <p>Search Substack, Medium and top publications content or ask an AI across your feeds — fast and delightful.</p>"
         "</div>"
     )
 

@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from src.config import settings
 from src.infrastructure.supabase.init_session import init_session
 from src.models.article_models import ArticleItem, FeedItem
-from src.models.sql_models import SubstackArticle
+from src.models.sql_models import FeedArticle
 from src.utils.logger_util import setup_logging
 
 
@@ -20,7 +20,7 @@ from src.utils.logger_util import setup_logging
 def ingest_from_rss(
     fetched_articles: list[ArticleItem],
     feed: FeedItem,
-    article_model: type[SubstackArticle],
+    article_model: type[FeedArticle],
     engine: Engine,
 ) -> None:
     """Ingest articles fetched from RSS (already Markdownified).
@@ -93,7 +93,7 @@ def ingest_from_rss(
 def _persist_batch(
     session: Session,
     batch: list[ArticleItem],
-    article_model: type[SubstackArticle],
+    article_model: type[FeedArticle],
 ) -> None:
     """Helper to bulk insert a batch of ArticleItems."""
     rows = [

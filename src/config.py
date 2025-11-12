@@ -12,13 +12,13 @@ from src.models.article_models import FeedItem
 # Supabase database settings
 # -----------------------------
 class SupabaseDBSettings(BaseModel):
-    table_name: str = Field(default="substack_articles", description="Supabase table name")
+    table_name: str = Field(default="feed_articles", description="Supabase table name")
     host: str = Field(default="localhost", description="Database host")
     name: str = Field(default="postgres", description="Database name")
     user: str = Field(default="postgres", description="Database user")
     password: SecretStr = Field(default=SecretStr("password"), description="Database password")
     port: int = Field(default=6543, description="Database port")
-    test_database: str = Field(default="substack_test", description="Test database name")
+    test_database: str = Field(default="feed_test", description="Test database name")
 
 
 # -----------------------------
@@ -43,7 +43,7 @@ class QdrantSettings(BaseModel):
     api_key: str = Field(default="", description="Qdrant API key")
     timeout: int = Field(default=30, description="Qdrant client timeout")
     collection_name: str = Field(
-        default="substack_collection", description="Qdrant collection name"
+        default="feed_collection", description="Qdrant collection name"
     )
     dense_model_name: str = Field(default="BAAI/bge-base-en", description="Dense model name")
     sparse_model_name: str = Field(
@@ -126,7 +126,7 @@ class OpenRouterSettings(BaseModel):
 # -----------------------------
 class OpikObservabilitySettings(BaseModel):
     api_key: str = Field(default="", description="Opik Observability API key")
-    project_name: str = Field(default="substack-pipeline", description="Opik project name")
+    project_name: str = Field(default="feed-pipeline", description="Opik project name")
 
 
 # -----------------------------
