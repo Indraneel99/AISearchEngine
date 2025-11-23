@@ -6,7 +6,7 @@ from src.api.models.provider_models import ModelConfig
 config = ModelConfig()
 
 PROMPT = """
-You are a skilled research assistant specialized in analyzing Substack newsletters.
+You are a skilled research assistant specialized in analyzing Substack, Medium and other newsletters.
 Respond to the user’s query using the provided context from these articles,
 that is retrieved from a vector database without relying on outside knowledge or assumptions.
 
@@ -34,7 +34,7 @@ that is retrieved from a vector database without relying on outside knowledge or
 
 # Create a new prompt
 prompt = opik.Prompt(
-    name="substack_research_assistant", prompt=PROMPT, metadata={"environment": "development"}
+    name="newsletter_research_assistant", prompt=PROMPT, metadata={"environment": "development"}
 )
 
 
